@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model ListViewModel
+
+
+<div class="col-sm-12 col-md-12">
+    <center><span class="time" style="font-size:80px; border:dotted; border-radius:7px;"></span></center>
+</div>
+    <div class="col-md-5 col-sm-6 col-xs-12 panel panel-default">
+        <div class="panel-heading">
+            <b>Market Information</b>
+            <b style="float:right">As of : @DateTime.Now.ToString("yyyy/MM/dd  HH:mm:ss")</b>
+        </div>
+        <div class="panel-body">
+            <div class="Nep_se" id="myDiv">
+
+                <div class="summary-panel clearfix">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead class="bg-primary">
+                                <tr class="rowtitle1" valign="top">
+                                    <td align="left"><b><small>Index</small></b></td>
+                                    <td align="right"><b><small>Current</small></b></td>
+                                    <td align="right"><b><small>Points Change</small></b></td>
+                                    <td align="right"><b><small>%Change</small></b></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var it in Model.marktsum)
+                                {
+
+                                    if (it != null && @it.image.Contains("increase"))
+                                    {
+                                        <tr class="row1" valign="top">
+                                            <td align="left">
+                                                <b>
+                                                    @it.Index
+                                                </b>
+                                            </td>
+                                            <td align="right" nowrap="" class="green" align="left">
+                                                @it.current
+                                            </td>
+                                            <td align="right" nowrap="" class="green" align="left">
+                                                @it.point_change
+                                            </td>
+                                            <td align="right" nowrap="" class="green" align="left">
+                                                @it.Percent_change
+                                            </td>
+                                            <td><img src="@it.image" width="8" height="4" border="0" alt="" align="middle">  </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr class="row1" valign="top">
+                                            <td align="left">
+                                                <b>
+                                                    @it.Index
+                                                </b>
+                                            </td>
+                                            <td align="right" nowrap="" class="red" align="left">
+                                                @it.current
+                                            </td>
+                                            <td align="right" nowrap="" class="red" align="left">
+                                                @it.point_change
+                                            </td>
+                                            <td align="right" nowrap="" class="red" align="left">
+                                                @it.Percent_change
+                                            </td>
+                                            <td><img src="@it.image" width="8" height="4" border="0" alt="" align="middle">  </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-sm-6  col-xs-12 panel panel-default pull-right">
+        <div class="panel-heading">
+            <b>Market Information</b>
+            <b style="float:right">As of : @DateTime.Now.ToString("yyyy/MM/dd  HH:mm:ss")</b>
+        </div>
+        <div class="panel-body">
+            <div class="Nep_se" id="myDiv">
+
+                <div class="summary-panel clearfix">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead class="bg-primary">
+                                <tr class="rowtitle1" valign="top">
+                                    <td align="left"><b><small>Sub-Indices</small></b></td>
+                                    <td align="right"><b><small>Current</small></b></td>
+                                    <td align="right"><b><small>Points Change</small></b></td>
+                                    <td align="right"><b><small>%Change</small></b></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var it in Model.subindices)
+                                {
+
+                                    if (it != null && @it.imageind.Contains("increase"))
+                                    {
+                                        <tr class="row1" valign="top">
+                                            <td align="left">
+                                                <b>
+                                                    @it.subindices
+                                                </b>
+                                            </td>
+                                            <td align="right" nowrap="" class="green" align="left">
+                                                @it.currentind
+                                            </td>
+                                            <td align="right" nowrap="" class="green" align="left">
+                                                @it.point_chnageind
+                                            </td>
+                                            <td align="right" nowrap="" class="green" align="left">
+                                                @it.Percent_chnageind
+                                            </td>
+                                            <td><img src="@it.imageind" width="8" height="4" border="0" alt="" align="middle">  </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr class="row1" valign="top">
+                                            <td align="left">
+                                                <b>
+                                                    @it.subindices
+                                                </b>
+                                            </td>
+                                            <td align="right" nowrap="" class="red" align="left">
+                                                @it.currentind
+                                            </td>
+                                            <td align="right" nowrap="" class="red" align="left">
+                                                @it.point_chnageind
+                                            </td>
+                                            <td align="right" nowrap="" class="red" align="left">
+                                                @it.Percent_chnageind
+                                            </td>
+                                            <td><img src="@it.imageind" width="8" height="4" border="0" alt="" align="middle">  </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function func() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            $(".time").text(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + "  (" + yyyy + "/" + mm + "/" + dd + ")");
+
+        };
+        setInterval(func, 1000);
+    </script>
